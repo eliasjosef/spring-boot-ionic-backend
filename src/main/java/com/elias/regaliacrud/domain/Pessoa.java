@@ -20,8 +20,6 @@ public class Pessoa implements Serializable {
 		
 	}
 
-	
-
 	public Pessoa(Integer id, String nome) {
 		super();
 		this.id = id;
