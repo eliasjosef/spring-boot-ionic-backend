@@ -8,6 +8,7 @@ public class RegaliacrudApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RegaliacrudApplication.class, args);
+			
 	}
 
 }
