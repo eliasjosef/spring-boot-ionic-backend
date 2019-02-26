@@ -16,8 +16,8 @@ public class PessoaResource {
 	@RequestMapping(method=RequestMethod.GET)
 	public List<Pessoa> lista(){
 		
-		Pessoa p1 = new Pessoa("Elias", 123);
-		Pessoa p2 = new Pessoa("José", 321);
+		Pessoa p1 = new Pessoa(123,"Elias");
+		Pessoa p2 = new Pessoa(321,"José");
 		
 		List<Pessoa> lista = new ArrayList<>();
 		lista.add(p1);
