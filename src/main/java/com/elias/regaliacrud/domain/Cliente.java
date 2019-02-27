@@ -8,57 +8,79 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Pessoa implements Serializable {
+public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	private String email;
 	
-	@ManyToMany(mappedBy="pessoas")
-	private List<Cliente> clientes = new ArrayList<>();
+	@ManyToMany
+	@JoinTable(name = "CLIENTE_PESSOA",
+			joinColumns = @JoinColumn(name = "cliente_id"),
+			inverseJoinColumns = @JoinColumn(name = "pessoa_id")
+			)
+	private List<Pessoa> pessoas = new ArrayList<>();
 	
-	public Pessoa() {
+	
+	public Cliente() {
 		
 	}
 
-	public Pessoa(Integer id, String nome) {
+
+	public Cliente(Integer id, String nome, String email) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.email = email;
 	}
 
+
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 
 	public String getNome() {
 		return nome;
 	}
 
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	public Integer getId() {
-		return id;
+
+	public String getEmail() {
+		return email;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
-	public List<Cliente> getClientes() {
-		return clientes;
-	}
-
-	public void setClientes(List<Cliente> clientes) {
-		this.clientes = clientes;
+	public List<Pessoa> getPessoas() {
+		return pessoas;
 	}
 
 
+	public void setPessoas(List<Pessoa> pessoas) {
+		this.pessoas = pessoas;
+	}
+	
 
 	@Override
 	public int hashCode() {
@@ -69,7 +91,6 @@ public class Pessoa implements Serializable {
 	}
 
 
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -78,7 +99,7 @@ public class Pessoa implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pessoa other = (Pessoa) obj;
+		Cliente other = (Cliente) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -87,9 +108,7 @@ public class Pessoa implements Serializable {
 		return true;
 	}
 
-	
 
-	
 	
 	
 
