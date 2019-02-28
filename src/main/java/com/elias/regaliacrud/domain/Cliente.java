@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,6 +24,7 @@ public class Cliente implements Serializable {
 	private String nome;
 	private String email;
 	
+	@JsonBackReference
 	@ManyToMany
 	@JoinTable(name = "CLIENTE_PESSOA",
 			joinColumns = @JoinColumn(name = "cliente_id"),
