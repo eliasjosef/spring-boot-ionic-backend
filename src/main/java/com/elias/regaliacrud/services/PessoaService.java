@@ -21,9 +21,6 @@ public class PessoaService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 		"Objeto não encontrado! Id: " + id + ", Tipo: " + Pessoa.class.getName()));
 		
-//		Pessoa obj = repo.getOne(id);
-//		
-//		return obj;
 		
 	}
 
