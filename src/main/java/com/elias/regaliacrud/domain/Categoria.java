@@ -13,7 +13,7 @@ import javax.persistence.ManyToMany;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-public class Pessoa implements Serializable {
+public class Categoria implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -22,14 +22,14 @@ public class Pessoa implements Serializable {
 	private String nome;
 	
 	@JsonManagedReference
-	@ManyToMany(mappedBy="pessoas")
-	private List<Cliente> clientes = new ArrayList<>();
+	@ManyToMany(mappedBy="categorias")
+	private List<Produto> produtos = new ArrayList<>();
 	
-	public Pessoa() {
+	public Categoria() {
 		
 	}
 
-	public Pessoa(Integer id, String nome) {
+	public Categoria(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -53,12 +53,12 @@ public class Pessoa implements Serializable {
 		this.id = id;
 	}
 	
-	public List<Cliente> getClientes() {
-		return clientes;
+	public List<Produto> getProdutos() {
+		return produtos;
 	}
 
-	public void setClientes(List<Cliente> clientes) {
-		this.clientes = clientes;
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
 	}
 
 
@@ -81,7 +81,7 @@ public class Pessoa implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pessoa other = (Pessoa) obj;
+		Categoria other = (Categoria) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

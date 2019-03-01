@@ -3,10 +3,10 @@ package com.elias.regaliacrud.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.elias.regaliacrud.domain.Pessoa;
+import com.elias.regaliacrud.domain.Produto;
 
 @Repository
-public interface PessoaRepository extends JpaRepository<Pessoa, Integer> {
+public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 
 
 }

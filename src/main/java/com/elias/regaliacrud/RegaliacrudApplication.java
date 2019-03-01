@@ -8,22 +8,22 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.elias.regaliacrud.domain.Cidade;
-import com.elias.regaliacrud.domain.Cliente;
+import com.elias.regaliacrud.domain.Produto;
 import com.elias.regaliacrud.domain.Estado;
-import com.elias.regaliacrud.domain.Pessoa;
+import com.elias.regaliacrud.domain.Categoria;
 import com.elias.regaliacrud.repositories.CidadeRepository;
-import com.elias.regaliacrud.repositories.ClienteRepository;
+import com.elias.regaliacrud.repositories.ProdutoRepository;
 import com.elias.regaliacrud.repositories.EstadoRepository;
-import com.elias.regaliacrud.repositories.PessoaRepository;
+import com.elias.regaliacrud.repositories.CategoriaRepository;
 
 @SpringBootApplication
 public class RegaliacrudApplication implements CommandLineRunner {
 
 	@Autowired
-	private PessoaRepository pessoaRepository;
+	private CategoriaRepository pessoaRepository;
 	
 	@Autowired
-	private ClienteRepository clienteRepository;
+	private ProdutoRepository clienteRepository;
 	
 	@Autowired
 	private CidadeRepository cidadeRepository;
@@ -39,12 +39,12 @@ public class RegaliacrudApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Pessoa p1 = new Pessoa(null, "Maria");
-		Pessoa p2 = new Pessoa(null, "Lucia");
+		Categoria p1 = new Categoria(null, "Informática");
+		Categoria p2 = new Categoria(null, "Escritório");
 		
-		Cliente c1 = new Cliente(null, "Severina", "severina@sevrina.com.br");
-		Cliente c2 = new Cliente(null, "Monica", "monica@monica.com.br");
-		Cliente c3 = new Cliente(null, "Gilberto", "gilberto@gilberto.com.br");
+		Produto c1 = new Produto(null, "Notebook", "Dell 14': Intel Core i5");
+		Produto c2 = new Produto(null, "Impressora", "Epson L330");
+		Produto c3 = new Produto(null, "Mouse", "Dell M660");
 		
 		Estado est1 = new Estado(null, "Pernambuco");
 		Estado est2 = new Estado(null, "Alagoas");
@@ -54,12 +54,12 @@ public class RegaliacrudApplication implements CommandLineRunner {
 		Cidade cd3 = new Cidade(null, "Maceió", est2);
 		
 		
-		p1.getClientes().addAll(Arrays.asList(c1, c2, c3));
-		p2.getClientes().addAll(Arrays.asList(c2));
+		p1.getProdutos().addAll(Arrays.asList(c1, c2, c3));
+		p2.getProdutos().addAll(Arrays.asList(c2));
 		
-		c1.getPessoas().addAll(Arrays.asList(p1));
-		c2.getPessoas().addAll(Arrays.asList(p1, p2));
-		c3.getPessoas().addAll(Arrays.asList(p1));
+		c1.getCategorias().addAll(Arrays.asList(p1));
+		c2.getCategorias().addAll(Arrays.asList(p1, p2));
+		c3.getCategorias().addAll(Arrays.asList(p1));
 		
 		est1.getCidades().addAll(Arrays.asList(cd1, cd2));
 		est2.getCidades().addAll(Arrays.asList(cd3));

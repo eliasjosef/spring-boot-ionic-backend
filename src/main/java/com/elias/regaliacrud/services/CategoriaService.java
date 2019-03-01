@@ -5,21 +5,21 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.elias.regaliacrud.domain.Pessoa;
-import com.elias.regaliacrud.repositories.PessoaRepository;
+import com.elias.regaliacrud.domain.Categoria;
+import com.elias.regaliacrud.repositories.CategoriaRepository;
 import com.elias.regaliacrud.services.exceptions.ObjectNotFoundException;
 
 @Service
-public class PessoaService {
+public class CategoriaService {
 	
 	@Autowired
-	private PessoaRepository repo;
+	private CategoriaRepository repo;
 	
-	public Pessoa buscar(Integer id) {
+	public Categoria buscar(Integer id) {
 		
-		Optional<Pessoa> obj = repo.findById(id);
+		Optional<Categoria> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-		"Objeto não encontrado! Id: " + id + ", Tipo: " + Pessoa.class.getName()));
+		"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 		
 		
 	}
