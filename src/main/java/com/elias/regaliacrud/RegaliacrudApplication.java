@@ -7,29 +7,40 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.elias.regaliacrud.domain.Cidade;
-import com.elias.regaliacrud.domain.Produto;
-import com.elias.regaliacrud.domain.Estado;
 import com.elias.regaliacrud.domain.Categoria;
-import com.elias.regaliacrud.repositories.CidadeRepository;
-import com.elias.regaliacrud.repositories.ProdutoRepository;
-import com.elias.regaliacrud.repositories.EstadoRepository;
+import com.elias.regaliacrud.domain.Cidade;
+import com.elias.regaliacrud.domain.Cliente;
+import com.elias.regaliacrud.domain.Endereco;
+import com.elias.regaliacrud.domain.Estado;
+import com.elias.regaliacrud.domain.Produto;
+import com.elias.regaliacrud.domain.enums.TipoCliente;
 import com.elias.regaliacrud.repositories.CategoriaRepository;
+import com.elias.regaliacrud.repositories.CidadeRepository;
+import com.elias.regaliacrud.repositories.ClienteRepository;
+import com.elias.regaliacrud.repositories.EnderecoRepository;
+import com.elias.regaliacrud.repositories.EstadoRepository;
+import com.elias.regaliacrud.repositories.ProdutoRepository;
 
 @SpringBootApplication
 public class RegaliacrudApplication implements CommandLineRunner {
 
 	@Autowired
-	private CategoriaRepository pessoaRepository;
+	private CategoriaRepository categoriaRepository;
 	
 	@Autowired
-	private ProdutoRepository clienteRepository;
+	private ProdutoRepository produtoRepository;
 	
 	@Autowired
 	private CidadeRepository cidadeRepository;
 	
 	@Autowired
 	private EstadoRepository estadoRepository; 
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
 	
 	
 	public static void main(String[] args) {
@@ -64,11 +75,21 @@ public class RegaliacrudApplication implements CommandLineRunner {
 		est1.getCidades().addAll(Arrays.asList(cd1, cd2));
 		est2.getCidades().addAll(Arrays.asList(cd3));
 		
-		
-		pessoaRepository.saveAll(Arrays.asList(p1, p2));
-		clienteRepository.saveAll(Arrays.asList(c1, c2, c3));
+		categoriaRepository.saveAll(Arrays.asList(p1, p2));
+		produtoRepository.saveAll(Arrays.asList(c1, c2, c3));
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(cd1, cd2, cd3));
+		
+		Cliente cl1 = new Cliente(null, "Elias Santos", "elias@elias.com", "123.345.567-78", TipoCliente.PESSOAJURIDICA);
+		
+		cl1.getTelefones().addAll(Arrays.asList("8888-8888", "9999-9999"));
+		
+		clienteRepository.saveAll(Arrays.asList(cl1));
+		
+		Endereco ed1 = new Endereco(null, "Rua Icó", "74", "Casa", "Pina", "51011-090", cd1, cl1);
+		
+		enderecoRepository.saveAll(Arrays.asList(ed1));
+		
 	}
 
 }
