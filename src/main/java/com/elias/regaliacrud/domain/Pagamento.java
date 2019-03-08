@@ -15,7 +15,8 @@ import javax.persistence.OneToOne;
 import com.elias.regaliacrud.domain.enums.EstadoPagamento;
 
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED) //Para mapear classes com herança
+//Para mapear classes com herança
+@Inheritance(strategy=InheritanceType.JOINED) 
 public abstract class Pagamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

@@ -13,6 +13,7 @@ import com.elias.regaliacrud.domain.Cidade;
 import com.elias.regaliacrud.domain.Cliente;
 import com.elias.regaliacrud.domain.Endereco;
 import com.elias.regaliacrud.domain.Estado;
+import com.elias.regaliacrud.domain.ItemPedido;
 import com.elias.regaliacrud.domain.Pagamento;
 import com.elias.regaliacrud.domain.PagamentoComBoleto;
 import com.elias.regaliacrud.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.elias.regaliacrud.repositories.CidadeRepository;
 import com.elias.regaliacrud.repositories.ClienteRepository;
 import com.elias.regaliacrud.repositories.EnderecoRepository;
 import com.elias.regaliacrud.repositories.EstadoRepository;
+import com.elias.regaliacrud.repositories.ItemPedidoRepository;
 import com.elias.regaliacrud.repositories.PagamentoRepository;
 import com.elias.regaliacrud.repositories.PedidoRepository;
 import com.elias.regaliacrud.repositories.ProdutoRepository;
@@ -56,6 +58,9 @@ public class RegaliacrudApplication implements CommandLineRunner {
 	@Autowired 
 	private PagamentoRepository pagamentoRepository;
 	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(RegaliacrudApplication.class, args);
@@ -64,12 +69,12 @@ public class RegaliacrudApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Categoria p1 = new Categoria(null, "Informática");
-		Categoria p2 = new Categoria(null, "Escritório");
+		Categoria c1 = new Categoria(null, "Informática");
+		Categoria c2 = new Categoria(null, "Escritório");
 		
-		Produto c1 = new Produto(null, "Notebook", "Dell 14': Intel Core i5");
-		Produto c2 = new Produto(null, "Impressora", "Epson L330");
-		Produto c3 = new Produto(null, "Mouse", "Dell M660");
+		Produto pr1 = new Produto(null, "Notebook", "Dell 14': Intel Core i5");
+		Produto pr2 = new Produto(null, "Impressora", "Epson L330");
+		Produto pr3 = new Produto(null, "Mouse", "Dell M660");
 		
 		Estado est1 = new Estado(null, "Pernambuco");
 		Estado est2 = new Estado(null, "Alagoas");
@@ -79,18 +84,18 @@ public class RegaliacrudApplication implements CommandLineRunner {
 		Cidade cd3 = new Cidade(null, "Maceió", est2);
 		
 		
-		p1.getProdutos().addAll(Arrays.asList(c1, c2, c3));
-		p2.getProdutos().addAll(Arrays.asList(c2));
+		c1.getProdutos().addAll(Arrays.asList(pr1, pr2, pr3));
+		c2.getProdutos().addAll(Arrays.asList(pr2));
 		
-		c1.getCategorias().addAll(Arrays.asList(p1));
-		c2.getCategorias().addAll(Arrays.asList(p1, p2));
-		c3.getCategorias().addAll(Arrays.asList(p1));
+		pr1.getCategorias().addAll(Arrays.asList(c1));
+		pr2.getCategorias().addAll(Arrays.asList(c1, c2));
+		pr3.getCategorias().addAll(Arrays.asList(c1));
 		
 		est1.getCidades().addAll(Arrays.asList(cd1, cd2));
 		est2.getCidades().addAll(Arrays.asList(cd3));
 		
-		categoriaRepository.saveAll(Arrays.asList(p1, p2));
-		produtoRepository.saveAll(Arrays.asList(c1, c2, c3));
+		categoriaRepository.saveAll(Arrays.asList(c1, c2));
+		produtoRepository.saveAll(Arrays.asList(pr1, pr2, pr3));
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(cd1, cd2, cd3));
 		
@@ -119,6 +124,21 @@ public class RegaliacrudApplication implements CommandLineRunner {
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pgmt1, pgmt2));
+		
+		ItemPedido ip1 = new ItemPedido(ped1, pr1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, pr3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, pr2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		pr1.getItens().addAll(Arrays.asList(ip2));
+		pr2.getItens().addAll(Arrays.asList(ip3));
+		pr3.getItens().addAll(Arrays.asList(ip1));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
+		
+		
 	}
 
 }
