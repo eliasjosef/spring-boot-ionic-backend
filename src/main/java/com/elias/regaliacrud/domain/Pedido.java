@@ -30,11 +30,9 @@ public class Pedido implements Serializable {
 	private Date instante;
 	
 	//O cascade serve para não dar erro de entidade trasiente na hora de salvar o pedido e o pagamento
-	@JsonManagedReference
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
 	private Pagamento pagamento;
 	
-	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
